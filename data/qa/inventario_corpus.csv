@@ -1,0 +1,42 @@
+archivo_pdf,archivo_txt,paginas,caracteres,chars_por_pagina,motor,requiere_ocr
+BS ISO 13474_2009.pdf,bs_iso_13474_2009.txt,52,146556,2818.4,pdftotext,no
+BS ISO 8297-1994.pdf,bs_iso_8297-1994.txt,18,52997,2944.3,pdftotext,no
+BSOL_4142_Industrial_Noise.pdf,bsol_4142_industrial_noise.txt,20,82727,4136.4,pdftotext,no
+BSOL_ISO_1996-1.pdf,bsol_iso_1996-1.txt,53,144697,2730.1,pdftotext,no
+BSOL_ISO_1996_2.pdf,bsol_iso_1996_2.txt,14,50028,3573.4,pdftotext,no
+BSOL_ISO_1996_3.pdf,bsol_iso_1996_3.txt,10,28345,2834.5,pdftotext,no
+BSOL_ISO_3746_Sound_Power.pdf,bsol_iso_3746_sound_power.txt,60,142976,2382.9,pdftotext,no
+ISO 3744.pdf.pdf,iso_3744.pdf.txt,36,132704,3686.2,pdftotext,no
+ISO 3745.pdf,iso_3745.txt,74,637095,8609.4,pdftotext,no
+ISO 9613-1.pdf,iso_9613-1.txt,30,315682,10522.7,pdftotext,no
+ISO 9613-2.pdf,iso_9613-2.txt,24,91520,3813.3,pdftotext,no
+"ISO_3744_2010_,_Acoustics_,_Determination.pdf",iso_3744_2010_acoustics_determination.txt,86,309716,3601.3,pdftotext,no
+UNE ISO 1996 - 2 .pdf,une_iso_1996_-_2.txt,46,126927,2759.3,pdftotext,no
+UNE ISO 1996-1.pdf,une_iso_1996-1.txt,32,87646,2738.9,pdftotext,no
+UNE-EN ISO 10140-1 A1.pdf,une-en_iso_10140-1_a1.txt,14,27341,1952.9,pdftotext,no
+UNE-EN ISO 10140-1.pdf,une-en_iso_10140-1.txt,66,157568,2387.4,pdftotext,no
+UNE-EN ISO 10140-2.pdf,une-en_iso_10140-2.txt,22,67188,3054.0,pdftotext,no
+UNE-EN ISO 10140-3.pdf,une-en_iso_10140-3.txt,22,58571,2662.3,pdftotext,no
+UNE-EN ISO 10140-3A1.pdf,une-en_iso_10140-3a1.txt,8,17350,2168.8,pdftotext,no
+UNE-EN ISO 10140-4.pdf,une-en_iso_10140-4.txt,22,57837,2629.0,pdftotext,no
+UNE-EN ISO 10140-5.pdf,une-en_iso_10140-5.txt,46,117960,2564.3,pdftotext,no
+UNE-EN ISO 140-18.pdf,une-en_iso_140-18.txt,26,65701,2527.0,pdftotext,no
+UNE-EN ISO 16032.pdf,une-en_iso_16032.txt,24,61307,2554.5,pdftotext,no
+UNE-EN ISO 16283-1.pdf,une-en_iso_16283-1.txt,52,128599,2473.1,pdftotext,no
+UNE-EN ISO 16283-2.pdf,une-en_iso_16283-2.txt,52,140318,2698.4,pdftotext,no
+UNE-EN ISO 16283-3.pdf,une-en_iso_16283-3.txt,46,139879,3040.8,pdftotext,no
+UNE-EN ISO 3382-1.pdf,une-en_iso_3382-1.txt,32,102916,3216.1,pdftotext,no
+UNE-EN ISO 3382-2 (V2).pdf,une-en_iso_3382-2_v2.txt,6,5061,843.5,pdftotext,no
+UNE-EN ISO 3382-2.pdf,une-en_iso_3382-2.txt,24,65049,2710.4,pdftotext,no
+UNE-EN ISO 3382-3.pdf,une-en_iso_3382-3.txt,24,58602,2441.8,pdftotext,no
+UNE-EN ISO 3746.pdf,une-en_iso_3746.txt,56,155402,2775.0,pdftotext,no
+UNE-EN ISO 4869-3.pdf,une-en_iso_4869-3.txt,20,43782,2189.1,pdftotext,no
+UNE-EN ISO 717-1.pdf,une-en_iso_717-1.txt,26,59020,2270.0,pdftotext,no
+UNE-EN ISO 717-2.pdf,une-en_iso_717-2.txt,24,64849,2702.0,pdftotext,no
+UNE-EN ISO 9612-2009 ERRATUM.pdf,une-en_iso_9612-2009_erratum.txt,2,2926,1463.0,pdftotext,no
+UNE-EN ISO 9612.pdf,une-en_iso_9612.txt,52,164927,3171.7,pdftotext,no
+UNE-EN ISO 9921.pdf,une-en_iso_9921.txt,36,88545,2459.6,pdftotext,no
+UNE-EN_ISO_10534_1_2002.pdf,une-en_iso_10534_1_2002.txt,36,94098,2613.8,pdftotext,no
+UNE_EN_ISO_10534_2_2002.pdf,une_en_iso_10534_2_2002.txt,36,93455,2596.0,pdftotext,no
+UNE_EN_ISO_354_2004.pdf,une_en_iso_354_2004.txt,28,75527,2697.4,pdftotext,no
+cnossos-eu jrc reference report_final_on line version_10 august 2012.pdf,cnossos-eu_jrc_reference_report_final_on_line_version_10_august_2012.txt,180,419576,2331.0,pdftotext,no

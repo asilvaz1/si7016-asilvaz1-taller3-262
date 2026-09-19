@@ -1,0 +1,34 @@
+categoria,categoria_nombre,source_file,preguntas
+cat01,"Ruido ambiental: medicion, descriptores y limites",BSOL_ISO_1996_3.pdf,3
+cat01,"Ruido ambiental: medicion, descriptores y limites",UNE ISO 1996 - 2 .pdf,6
+cat01,"Ruido ambiental: medicion, descriptores y limites",UNE ISO 1996-1.pdf,6
+cat02,Propagacion del sonido al aire libre,ISO 9613-1.pdf,4
+cat02,Propagacion del sonido al aire libre,ISO 9613-2.pdf,6
+cat03,Potencia sonora de fuentes,BS ISO 8297-1994.pdf,2
+cat03,Potencia sonora de fuentes,BSOL_ISO_3746_Sound_Power.pdf,5
+cat03,Potencia sonora de fuentes,ISO 3745.pdf,3
+cat03,Potencia sonora de fuentes,"ISO_3744_2010_,_Acoustics_,_Determination.pdf",5
+cat04,Ruido industrial y evaluacion de molestia,BSOL_4142_Industrial_Noise.pdf,5
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 10140-1.pdf,2
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 10140-2.pdf,2
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 10140-3.pdf,2
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 10140-4.pdf,1
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 10140-5.pdf,2
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 140-18.pdf,1
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 16032.pdf,1
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 16283-1.pdf,3
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 16283-2.pdf,2
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 16283-3.pdf,2
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 717-1.pdf,2
+cat05,Aislamiento acustico en edificaciones,UNE-EN ISO 717-2.pdf,2
+cat05,Aislamiento acustico en edificaciones,UNE-EN_ISO_10534_1_2002.pdf,1
+cat05,Aislamiento acustico en edificaciones,UNE_EN_ISO_10534_2_2002.pdf,1
+cat05,Aislamiento acustico en edificaciones,UNE_EN_ISO_354_2004.pdf,1
+cat06,Acustica de salas y reverberacion,UNE-EN ISO 3382-1.pdf,5
+cat06,Acustica de salas y reverberacion,UNE-EN ISO 3382-2.pdf,3
+cat06,Acustica de salas y reverberacion,UNE-EN ISO 3382-3.pdf,2
+cat07,Exposicion ocupacional y proteccion auditiva,UNE-EN ISO 4869-3.pdf,2
+cat07,Exposicion ocupacional y proteccion auditiva,UNE-EN ISO 9612.pdf,4
+cat07,Exposicion ocupacional y proteccion auditiva,UNE-EN ISO 9921.pdf,4
+cat08,Modelos de calculo: eventos impulsivos y ruido de transito,BS ISO 13474_2009.pdf,4
+cat08,Modelos de calculo: eventos impulsivos y ruido de transito,cnossos-eu jrc reference report_final_on line version_10 august 2012.pdf,6

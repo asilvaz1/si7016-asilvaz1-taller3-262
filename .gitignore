@@ -1,0 +1,26 @@
+# Normas ISO/UNE: no se versionan por derechos de autor
+data/raw/
+data/processed/
+*.pdf
+*.zip
+
+# Pesos de modelos
+*.safetensors
+*.bin
+adapters/
+merged-model/
+
+# Estado de los scripts de despliegue del curso
+.model_id
+.endpoint_id
+.deployed_model_id
+
+# Entornos y caches
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+.env
+
+# Estado de los scripts de despliegue propios
+.endpoint_base.json
+src/deploy/.endpoint_base.json

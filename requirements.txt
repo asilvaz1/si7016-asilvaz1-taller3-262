@@ -1,0 +1,20 @@
+# --- Extraccion y preparacion del corpus ---
+pypdf==6.18.0
+pdfplumber==0.11.4
+
+# --- Dataset y utilidades ---
+pandas==2.2.3
+tqdm==4.67.1
+
+# --- RAG local (Fase 1) ---
+sentence-transformers==3.3.1
+faiss-cpu==1.9.0
+langchain-text-splitters==0.3.4
+
+# --- Evaluacion ---
+rouge-score==0.1.2
+evaluate==0.4.3
+
+# --- GCP (Fases 2 y 3) ---
+google-cloud-aiplatform==1.75.0
+google-cloud-storage==2.19.0
