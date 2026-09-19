@@ -24,3 +24,7 @@ __pycache__/
 # Estado de los scripts de despliegue propios
 .endpoint_base.json
 src/deploy/.endpoint_base.json
+
+# Respaldos previos a la limpieza del eco del prompt. El texto original ya
+# queda dentro del jsonl en el campo prediction_raw, no hay que duplicarlo.
+results/*.jsonl.raw
