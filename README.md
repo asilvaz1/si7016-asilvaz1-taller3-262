@@ -20,7 +20,7 @@ las mismas tareas.
 | Fase | Contenido | Estado |
 | --- | --- | --- |
 | 0 | Extracción del corpus y dataset QA de 100 preguntas | hecho |
-| 0 | Habilitar APIs de GCP, bucket, endpoint base en Model Garden | pendiente |
+| 0 | Habilitar APIs de GCP, bucket, endpoint base en Model Garden | hecho |
 | 1 | Prototipo RAG local (FAISS + BM25, CPU) | hecho: indice de 33 normas, Recall@5 = 0.87 (denso) |
 | 2 | Fine-tuning QLoRA en Vertex (prueba de humo + entrenamiento completo) | pendiente |
 | 3 | Despliegue, RAG en Vertex AI RAG Engine y evaluación comparativa | pendiente |
