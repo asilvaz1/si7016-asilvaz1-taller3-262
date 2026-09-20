@@ -21,7 +21,7 @@ las mismas tareas.
 | --- | --- | --- |
 | 0 | Extracción del corpus y dataset QA de 100 preguntas | hecho |
 | 0 | Habilitar APIs de GCP, bucket, endpoint base en Model Garden | pendiente |
-| 1 | Prototipo RAG local (FAISS/Chroma, CPU) | pendiente |
+| 1 | Prototipo RAG local (FAISS + BM25, CPU) | hecho: indice de 33 normas, Recall@5 = 0.87 (denso) |
 | 2 | Fine-tuning QLoRA en Vertex (prueba de humo + entrenamiento completo) | pendiente |
 | 3 | Despliegue, RAG en Vertex AI RAG Engine y evaluación comparativa | pendiente |
 | 4 | Entrega, limpieza de recursos y declaración de ética | pendiente |
@@ -58,3 +58,29 @@ python src/data/extract_pdf.py --src "../talleres/taller3/NORMAS ESTANDARES" \
 python src/data/build_qa_dataset.py --seed 42
 python src/data/verify_qa_grounding.py
 ```
+
+## RAG local (Fase 1)
+
+```bash
+python src/rag/index.py                                   # chunking + embeddings + FAISS -> data/index/
+python src/rag/eval_retrieval.py --dataset data/qa/normas_ruido_all.jsonl --rerank
+python src/rag/run_rag.py --generator none                # recuperacion + prompts, sin GPU
+python src/rag/run_rag.py --generator endpoint            # generacion real -> results/respuestas-rag.jsonl
+```
+
+Chunks de 1000 caracteres con solape de 150, embeddings `intfloat/multilingual-e5-base`,
+recuperacion densa (default), BM25 o hibrida (RRF) y reranker CrossEncoder opcional. Con las 33 normas, la
+densa gana (Recall@5 = 0.87 sobre las 100 preguntas frente a 0.83 hibrida y 0.51 BM25); ver `results/recall-retrieval-all.csv`. Los prompts
+del RAG estan en `src/rag/prompts.py` y documentados en `prompts/rag-anclado.md`.
+
+## Evaluacion
+
+```bash
+python src/eval/test_metrics.py     # pruebas con respuestas de mentira
+python src/eval/run_eval.py         # results/respuestas-*.jsonl -> results/metricas-comparativas.csv
+```
+
+ROUGE-1/2/L (F-measure) sobre la respuesta; Recall@1/3/5 a nivel de documento para el RAG.
+Las respuestas vacias o con `__ERROR__` no se puntuan y se cuentan aparte (`n` frente a
+`n_validas`). En chain-of-thought se puntua solo lo que sigue a la ultima linea `Answer:`,
+y en rag-anclado se quitan las citas `[n]`.

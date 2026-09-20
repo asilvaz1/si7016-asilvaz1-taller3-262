@@ -1,0 +1,4 @@
+modo,recall@1,recall@3,recall@5,recall@10,mrr,n_preguntas,n_normas_indexadas
+dense,0.9,0.95,0.95,1.0,0.931,20,33
+bm25,0.45,0.55,0.6,0.75,0.529,20,33
+hybrid,0.65,0.9,0.95,1.0,0.792,20,33
