@@ -32,6 +32,24 @@ from google.cloud import aiplatform
 
 ESTADO = Path(__file__).with_name(".endpoint_base.json")
 
+# El contenedor de serving devuelve el prompt completo y luego la generacion,
+# separados por "Output:". Si eso llega asi a ROUGE, la metrica no mide nada.
+# La misma logica vive en src/eval/clean_predictions.py, para poder arreglar
+# resultados ya guardados.
+SEPARADORES_ECO = ["\nOutput:\n", "\nOutput:", "<start_of_turn>model\n"]
+TOKENS_CONTROL = ["<end_of_turn>", "<start_of_turn>", "<eos>", "<bos>", "<pad>"]
+
+
+def limpiar_eco(texto: str) -> str:
+    """Deja solo lo que genero el modelo, sin el eco del prompt."""
+    for sep in SEPARADORES_ECO:
+        if sep in texto:
+            texto = texto.split(sep, 1)[1]
+            break
+    for token in TOKENS_CONTROL:
+        texto = texto.replace(token, "")
+    return texto.strip()
+
 PLANTILLAS = {
     # Las 3 tecnicas de prompt engineering que exige el taller. El prompt exacto
     # de cada una se documenta en prompts/ ; aqui viven las versiones operativas.
@@ -85,6 +103,18 @@ def main():
     ap.add_argument("--max_tokens", type=int, default=256)
     ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--limit", type=int, default=0, help="0 = todas")
+    ap.add_argument("--route", default="auto", choices=["auto", "shared", "dedicated"],
+                    help="dedicated usa el DNS propio del endpoint "
+                         "(*.prediction.vertexai.goog), que muchas redes "
+                         "institucionales no resuelven. shared usa la URL regional "
+                         "<region>-aiplatform.googleapis.com, la misma de "
+                         "predict-shared.sh del repo del curso. auto intenta la del "
+                         "SDK y cae a la compartida si el DNS falla.")
+    ap.add_argument("--timeout", type=float, default=300.0,
+                    help="Segundos de espera por respuesta")
+    ap.add_argument("--check", action="store_true",
+                    help="Solo diagnostica el endpoint: si tiene DNS dedicado y si "
+                         "ese nombre resuelve desde esta red. No consume prediccion.")
     ap.add_argument("--debug", action="store_true",
                     help="Imprime la respuesta cruda del endpoint. Util la primera "
                          "vez: distintos contenedores de serving devuelven la "
@@ -110,6 +140,83 @@ def main():
 
     plantilla = PLANTILLAS[args.technique]
 
+    # URL "compartida" (regional). Es la misma forma que usa predict-shared.sh
+    # del repo del curso. No depende del DNS dedicado del endpoint
+    # (*.prediction.vertexai.goog), que muchas redes institucionales no resuelven
+    # porque filtran el TLD .goog.
+    URL_COMPARTIDA = (
+        f"https://{est['region']}-aiplatform.googleapis.com/v1"
+        f"/projects/{est['project']}/locations/{est['region']}"
+        f"/endpoints/{est['endpoint_id']}:predict"
+    )
+
+    _sesion = {"s": None}
+
+    def sesion_autorizada():
+        if _sesion["s"] is None:
+            import google.auth
+            from google.auth.transport.requests import AuthorizedSession
+            cred, _ = google.auth.default(
+                scopes=["https://www.googleapis.com/auth/cloud-platform"])
+            _sesion["s"] = AuthorizedSession(cred)
+        return _sesion["s"]
+
+    def es_error_de_dns(e) -> bool:
+        texto = f"{type(e).__name__}: {e}"
+        return any(s in texto for s in (
+            "getaddrinfo", "NameResolution", "Failed to resolve", "11001",
+            "Name or service not known"))
+
+    def via_compartida(instancia):
+        r = sesion_autorizada().post(
+            URL_COMPARTIDA, json={"instances": [instancia]}, timeout=args.timeout)
+        if r.status_code != 200:
+            raise RuntimeError(f"HTTP {r.status_code}: {r.text[:500]}")
+        predicciones = r.json().get("predictions") or [None]
+        return predicciones[0]
+
+    def via_sdk(instancia):
+        return endpoint.predict(instances=[instancia], timeout=args.timeout).predictions[0]
+
+    ruta = {"actual": args.route}
+
+    def obtener(instancia):
+        if ruta["actual"] == "shared":
+            return via_compartida(instancia)
+        try:
+            return via_sdk(instancia)
+        except Exception as e:                                   # noqa: BLE001
+            if ruta["actual"] == "dedicated" or not es_error_de_dns(e):
+                raise
+            print("\n   El DNS dedicado del endpoint no resuelve desde esta red.")
+            print("   Cambiando a la ruta compartida (regional) y reintentando.\n")
+            ruta["actual"] = "shared"
+            return via_compartida(instancia)
+
+    if args.check:
+        import socket
+        dns = getattr(endpoint, "dedicated_endpoint_dns", None)
+        habilitado = getattr(endpoint, "dedicated_endpoint_enabled", None)
+        print(f"endpoint_id            : {est['endpoint_id']}")
+        print(f"dedicated habilitado   : {habilitado}")
+        print(f"dns dedicado           : {dns or '(ninguno)'}")
+        if dns:
+            try:
+                print(f"resuelve desde aqui    : si -> {socket.gethostbyname(dns)}")
+            except OSError as e:
+                print(f"resuelve desde aqui    : NO ({e})")
+                print("   -> usa --route shared, o redespliega con --no-dedicated")
+        print(f"url compartida         : {URL_COMPARTIDA}")
+        try:
+            r = sesion_autorizada().get(
+                f"https://{est['region']}-aiplatform.googleapis.com/v1"
+                f"/projects/{est['project']}/locations/{est['region']}"
+                f"/endpoints/{est['endpoint_id']}", timeout=30)
+            print(f"url compartida alcanzable: HTTP {r.status_code}")
+        except Exception as e:                                   # noqa: BLE001
+            print(f"url compartida alcanzable: NO ({e})")
+        return 0
+
     def preguntar(q: str) -> str:
         instancia = {
             "prompt": plantilla.format(q=q),
@@ -118,8 +225,7 @@ def main():
             "top_p": 1.0,
             "top_k": -1,
         }
-        r = endpoint.predict(instances=[instancia])
-        pred = r.predictions[0]
+        pred = obtener(instancia)
         if args.debug:
             print("--- respuesta cruda del endpoint ---")
             print(f"tipo: {type(pred).__name__}")
@@ -135,7 +241,8 @@ def main():
         return str(pred)
 
     if args.prompt:
-        print(preguntar(args.prompt))
+        bruto = preguntar(args.prompt)
+        print(limpiar_eco(bruto))
         return 0
 
     if not args.dataset:
@@ -155,7 +262,8 @@ def main():
         salida.append({
             "question": d["question"],
             "reference": d.get("answer", ""),
-            "prediction": resp,
+            "prediction": resp if resp.startswith("__ERROR__") else limpiar_eco(resp),
+            "prediction_raw": resp,
             "technique": args.technique,
             "system": "base",
             "source_file": d.get("source_file", ""),

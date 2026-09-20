@@ -150,6 +150,49 @@ python .\si7016-asilvaz1-taller3-262\src\deploy\03-predict-endpoint.py `
 Si en vez de texto sale un volcado JSON con campos raros, cópiamelo y ajusto el
 parser antes de seguir.
 
+### 4.1b Si falla con `Failed to resolve ...prediction.vertexai.goog`
+
+Model Garden crea el endpoint con un **host dedicado**, un nombre propio bajo
+el TLD `.goog`, distinto de `googleapis.com`. Muchas redes institucionales
+resuelven `googleapis.com` pero filtran `.goog`, así que el despliegue funciona
+y la predicción no.
+
+Diagnóstico, sin consumir una predicción:
+
+```powershell
+python .\si7016-asilvaz1-taller3-262\src\deploy\03-predict-endpoint.py --check
+```
+
+Te dice si el endpoint tiene DNS dedicado, si ese nombre resuelve desde tu red,
+y si la URL compartida responde.
+
+**La solución no requiere redesplegar.** El script ahora puede usar la URL
+regional `us-central1-aiplatform.googleapis.com`, que es la misma forma del
+`predict-shared.sh` del repo del curso:
+
+```powershell
+python ...\03-predict-endpoint.py --prompt "What is the scope of ISO 1996-1?" --route shared --debug
+```
+
+Con `--route auto`, que es el default, el script intenta la ruta del SDK y cae
+sola a la compartida cuando el DNS falla, avisando en pantalla.
+
+Si prefieres dejarlo limpio de raíz, puedes redesplegar sin host dedicado:
+
+```powershell
+python ...\04-undeploy-cleanup.py --delete-endpoint --delete-model
+python ...\02-deploy-model-garden-base.py --model "<id>" --no-dedicated
+```
+
+Pero son otros 15 a 30 minutos y otro rato de cobro, así que solo vale la pena
+si la ruta compartida también falla.
+
+**Detalle del SDK que cuesta encontrar:** pasar `use_dedicated_endpoint=False`
+**no** desactiva el host dedicado. El SDK solo escribe esa bandera cuando es
+`True`, y Model Garden la habilita por su cuenta. Para desactivarla de verdad
+hay que mandar `dedicated_endpoint_disabled=True`, que es lo que hace
+`--no-dedicated`.
+
 ### 4.2 Las tres técnicas sobre el split de evaluación
 
 ```powershell
@@ -174,6 +217,23 @@ todo lo que necesita el cálculo de ROUGE.
 
 Al final de cada corrida el script informa cuántas respuestas salieron con
 error. Si son más de dos o tres, para y revisa antes de seguir.
+
+### 4.2b Limpiar el eco del prompt
+
+El contenedor de serving devuelve el prompt completo y despues la generacion,
+separados por `Output:`. Si eso llega asi a ROUGE la metrica no mide nada,
+porque la prediccion arrastra cientos de tokens que la referencia no tiene.
+
+```powershell
+python .\si7016-asilvaz1-taller3-262\src\eval\clean_predictions.py "results\respuestas-*.jsonl"
+```
+
+Deja en `prediction` solo lo generado, guarda el original en `prediction_raw`, y
+respalda el archivo previo con extension `.raw`. Con `--dry-run` muestra el
+efecto sin escribir.
+
+Desde ahora el script 03 ya limpia al vuelo, asi que esto solo hace falta para
+resultados guardados antes de ese cambio.
 
 ### 4.3 Documentar los prompts
 
@@ -228,6 +288,7 @@ vez de adivinar.
 | `403 PERMISSION_DENIED` al desplegar | Falta `gcloud auth application-default login`, o el proyecto activo no es el correcto: `gcloud config list` |
 | `Quota exceeded ... nvidia_l4_gpus` | La cuota está en otra región. Prueba `--region us-west1` en los scripts 01 a 04 |
 | `UNAVAILABLE ... WSA Error ... 11001` o `503` | La red bloquea gRPC. Los scripts ya usan REST por defecto; si aun así falla, corre `00b-diagnostico-red.ps1` (abajo). Nada se desplegó ni se cobró: la llamada no salió del computador |
+| `Failed to resolve ...prediction.vertexai.goog` | Tu red no resuelve el TLD `.goog` del host dedicado. Usa `--route shared` (ver 4.1b) |
 | El despliegue se queda colgado más de 40 min | Cancela con Ctrl+C y revisa el estado real con `gcloud ai endpoints list --region us-central1`. El endpoint puede haber quedado a medias y estar cobrando |
 
 ## Si la red bloquea la conexión: `WSA Error 11001`, `UNAVAILABLE`, `503`

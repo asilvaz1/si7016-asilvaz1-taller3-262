@@ -20,11 +20,33 @@ las mismas tareas.
 | Fase | Contenido | Estado |
 | --- | --- | --- |
 | 0 | Extracción del corpus y dataset QA de 100 preguntas | hecho |
-| 0 | Habilitar APIs de GCP, bucket, endpoint base en Model Garden | pendiente |
+| 0 | APIs de GCP, bucket regional y Artifact Registry | hecho |
+| 0 | Endpoint base `gemma-7b-it` en Model Garden y línea base evaluada | hecho |
 | 1 | Prototipo RAG local (FAISS + BM25, CPU) | hecho: indice de 33 normas, Recall@5 = 0.87 (denso) |
 | 2 | Fine-tuning QLoRA en Vertex (prueba de humo + entrenamiento completo) | pendiente |
-| 3 | Despliegue, RAG en Vertex AI RAG Engine y evaluación comparativa | pendiente |
+| 3 | Despliegue del afinado, RAG en Vertex AI RAG Engine y evaluación comparativa | pendiente |
 | 4 | Entrega, limpieza de recursos y declaración de ética | pendiente |
+
+### Línea base ya medida
+
+60 respuestas del modelo base puro sobre las 20 preguntas del split de
+evaluación, con las tres técnicas de prompt engineering, sin ningún error de
+llamada:
+
+| Archivo | Técnica |
+| --- | --- |
+| `results/respuestas-base-zero-shot.jsonl` | Zero-shot |
+| `results/respuestas-base-few-shot.jsonl` | Few-shot |
+| `results/respuestas-base-cot.jsonl` | Chain-of-thought |
+
+Cada fila trae `prediction` (solo lo generado) y `prediction_raw` (la respuesta
+tal cual la devolvió el contenedor, con el eco del prompt). Los `.raw` al lado
+son el respaldo previo a la limpieza.
+
+El modelo base inventa cláusulas y confunde normas con seguridad: por ejemplo
+afirma que ISO 3382-1 trata de potencia acústica de vehículos, cuando es de
+acústica de salas. Eso no es un fallo del montaje, es la evidencia que el
+taller busca, y es contra lo que se compararán el fine-tuning y el RAG.
 
 ## Estructura
 
@@ -36,7 +58,7 @@ src/data/         extracción de PDF, construcción y verificación del dataset
 src/finetuning/   train_gemma.py, Dockerfile, submit_vertex_job.py
 src/deploy/       despliegue del modelo base y del modelo afinado
 src/rag/          índice FAISS local y corpus en Vertex AI RAG Engine
-src/eval/         ROUGE y Recall@K
+src/eval/         limpieza de respuestas, ROUGE y Recall@K
 prompts/          el prompt exacto de cada técnica de prompt engineering
 results/          respuestas y métricas comparativas
 evidencia/        capturas del despliegue en GCP
