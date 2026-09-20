@@ -24,3 +24,6 @@ __pycache__/
 # Estado de los scripts de despliegue propios
 .endpoint_base.json
 src/deploy/.endpoint_base.json
+
+# Indice RAG derivado del texto de las normas
+data/index/
