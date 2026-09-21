@@ -5,10 +5,11 @@ transparencia del enunciado.
 
 ## 1. Integrantes y aporte específico de cada uno
 
-El taller se desarrolló en pareja, con un reparto por carpetas acordado por
+El taller se desarrolló en equipo, con un reparto por carpetas acordado por
 escrito antes de empezar (`HANDOFF.md` en la raíz del repositorio), para que
-ninguno de los dos editara los archivos del otro. El historial de git refleja
-ese reparto: dos ramas, `finetuning-deploy` y `rag-eval`, con commits separados.
+nadie editara los archivos de otro. El historial de git refleja ese reparto: dos
+ramas de trabajo, `finetuning-deploy` y `rag-eval`, con commits separados y
+autoría verificable con `git log --format='%an'`.
 
 **Alejandro Silva Zuluaga**
 
@@ -35,6 +36,19 @@ ese reparto: dos ramas, `finetuning-deploy` y `rag-eval`, con commits separados.
   (`src/eval/metrics.py`, `run_eval.py`, `test_metrics.py`).
 - Generación de las 80 respuestas del sistema RAG y las primeras métricas
   comparativas.
+
+**David Botero**
+
+- [PENDIENTE: una o dos líneas concretas y verificables sobre lo que hizo. Por
+  ejemplo: revisión del código, pruebas de que los scripts corren en otra
+  máquina, montaje de la interfaz de consulta, o apoyo en la depuración de un
+  problema puntual.]
+
+Nota de transparencia sobre la autoría: a la fecha de esta entrega, el historial
+de git registra commits de Alejandro Silva Zuluaga (con dos identidades de git,
+`Alejandro Silva Zuluaga` y `asilvaz1`) y de Isabel Jurado. El aporte de David
+Botero se hizo por fuera del control de versiones, y por eso se describe aquí de
+forma explícita en vez de dejar que el historial hable por él.
 
 ## 2. Código reutilizado y de dónde salió
 
