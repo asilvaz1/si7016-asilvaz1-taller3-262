@@ -2,6 +2,9 @@ system,technique,n,n_validas,rouge1,rouge2,rougeL,recall@1,recall@3,recall@5
 base,chain-of-thought,20,20,0.2578,0.0733,0.182,,,
 base,few-shot,20,20,0.2818,0.0768,0.1872,,,
 base,zero-shot,20,20,0.3251,0.0792,0.2088,,,
+finetuning,chain-of-thought,20,20,0.3622,0.1137,0.2341,,,
+finetuning,few-shot,20,20,0.391,0.1379,0.2535,,,
+finetuning,zero-shot,20,20,0.4075,0.1486,0.2709,,,
 rag,chain-of-thought,20,20,0.3243,0.1636,0.2527,0.9,0.95,0.95
 rag,few-shot,20,20,0.255,0.1169,0.1846,0.9,0.95,0.95
 rag,rag-anclado,20,20,0.4248,0.1997,0.2913,0.9,0.95,0.95
