@@ -1,0 +1,5 @@
+# El dataset se copia aqui solo como contexto de build (ver 00-build-image.ps1).
+# La copia canonica vive en data/qa/ y es la que se versiona.
+normas_ruido_train.jsonl
+normas_ruido_eval.jsonl
+.job_finetuning.json

@@ -1,0 +1,10 @@
+﻿{
+    "project":  "si7016-262-nlp",
+    "region":  "us-central1",
+    "merged_dir":  "gs://asilvaz1taller3/normas-ruido-merged",
+    "model_id":  "4102823790755446784",
+    "model_display_name":  "gemma-7b-it-normas-ruido-merged",
+    "dedicated":  false,
+    "endpoint_id":  "6894224328934555648",
+    "endpoint_display_name":  "gemma-7b-it-normas-ruido-merged-endpoint"
+}
