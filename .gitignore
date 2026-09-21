@@ -25,6 +25,9 @@ __pycache__/
 .endpoint_base.json
 src/deploy/.endpoint_base.json
 
+# Indice RAG derivado del texto de las normas
+data/index/
+
 # Respaldos previos a la limpieza del eco del prompt. El texto original ya
 # queda dentro del jsonl en el campo prediction_raw, no hay que duplicarlo.
 results/*.jsonl.raw
