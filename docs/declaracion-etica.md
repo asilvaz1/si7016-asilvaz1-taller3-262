@@ -26,7 +26,7 @@ ese reparto: dos ramas, `finetuning-deploy` y `rag-eval`, con commits separados.
   modelo afinado (`src/finetuning/`).
 - README, runbooks y esta declaración.
 
-**[NOMBRE DE LA COMPAÑERA]**
+**Isabel Jurado**
 
 - Sistema RAG completo: chunking, embeddings, índice FAISS, recuperación densa,
   BM25 e híbrida, y reranker CrossEncoder (`src/rag/`).
