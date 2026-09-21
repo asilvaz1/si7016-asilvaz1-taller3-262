@@ -60,6 +60,12 @@ def main():
     ap.add_argument("--model_name", default="gemma-7b-it-base-si7016")
     ap.add_argument("--dedicated", action="store_true",
                     help="Endpoint con host dedicado (como en create-model-agent-platform.py)")
+    ap.add_argument("--no-dedicated", dest="no_dedicated", action="store_true",
+                    help="Fuerza un endpoint SIN host dedicado. Usalo si tu red no "
+                         "resuelve el DNS *.prediction.vertexai.goog. OJO: no basta "
+                         "con omitir --dedicated, porque Model Garden habilita el "
+                         "host dedicado por su cuenta; hay que desactivarlo "
+                         "explicitamente con esta opcion.")
     ap.add_argument("--transport", default="rest", choices=["rest", "grpc"],
                     help="rest usa HTTPS normal (como gcloud) y respeta el proxy del "
                          "sistema; grpc abre su propio canal y suele ser lo que bloquean "
@@ -81,6 +87,12 @@ def main():
         use_dedicated_endpoint=args.dedicated,
         reservation_affinity_type="NO_RESERVATION",
     )
+    # El SDK solo ACTIVA el host dedicado cuando use_dedicated_endpoint=True;
+    # pasarlo en False no lo desactiva, y Model Garden lo habilita por defecto
+    # para varios modelos. Para desactivarlo de verdad hay que mandar
+    # dedicated_endpoint_disabled=True.
+    if args.no_dedicated:
+        kwargs["dedicated_endpoint_disabled"] = True
     if args.container:
         kwargs["serving_container_image_uri"] = args.container
 
