@@ -82,13 +82,16 @@ PLANTILLAS = {
 }
 
 
-def cargar_estado():
-    if not ESTADO.exists():
+def cargar_estado(ruta=None):
+    archivo = Path(ruta) if ruta else ESTADO
+    if not archivo.is_absolute():
+        archivo = Path(__file__).with_name(str(archivo))
+    if not archivo.exists():
         raise SystemExit(
-            f"No existe {ESTADO.name}. Corre primero 02-deploy-model-garden-base.py, "
-            "o pasa --endpoint_id, --project y --region a mano."
+            f"No existe {archivo.name}. Corre primero el script de despliegue que lo "
+            "genera, o pasa --endpoint_id, --project y --region a mano."
         )
-    return json.loads(ESTADO.read_text(encoding="utf-8"))
+    return json.loads(archivo.read_text(encoding="utf-8"))
 
 
 def main():
@@ -100,6 +103,14 @@ def main():
     ap.add_argument("--dataset", default=None, help="jsonl con campo 'question'")
     ap.add_argument("--out", default=None, help="jsonl de salida")
     ap.add_argument("--technique", default="zero-shot", choices=list(PLANTILLAS))
+    ap.add_argument("--system", default="base", choices=["base", "finetuning", "rag"],
+                    help="Valor del campo 'system' en el jsonl de salida. El esquema "
+                         "del HANDOFF (4.2) pide que los tres sistemas escriban los "
+                         "mismos campos para que run_eval.py los lea con un parser.")
+    ap.add_argument("--endpoint_file", default=None,
+                    help="Archivo de estado del endpoint. Por defecto "
+                         ".endpoint_base.json; usa .endpoint_finetuned.json para el "
+                         "modelo afinado.")
     ap.add_argument("--max_tokens", type=int, default=256)
     ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--limit", type=int, default=0, help="0 = todas")
@@ -129,7 +140,7 @@ def main():
     if args.endpoint_id and args.project and args.region:
         est = {"endpoint_id": args.endpoint_id, "project": args.project, "region": args.region}
     else:
-        est = cargar_estado()
+        est = cargar_estado(args.endpoint_file)
 
     aiplatform.init(project=est["project"], location=est["region"],
                     api_transport=args.transport)
@@ -265,12 +276,13 @@ def main():
             "prediction": resp if resp.startswith("__ERROR__") else limpiar_eco(resp),
             "prediction_raw": resp,
             "technique": args.technique,
-            "system": "base",
+            "system": args.system,
             "source_file": d.get("source_file", ""),
             "section_label": d.get("section_label", ""),
         })
 
-    destino = Path(args.out) if args.out else Path("results/respuestas-base.jsonl")
+    destino = (Path(args.out) if args.out
+               else Path(f"results/respuestas-{args.system}.jsonl"))
     destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(
         "\n".join(json.dumps(x, ensure_ascii=False) for x in salida) + "\n",

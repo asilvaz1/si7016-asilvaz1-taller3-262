@@ -1,0 +1,17 @@
+# Este archivo existe para ANULAR un comportamiento por defecto de gcloud:
+# cuando `gcloud builds submit` no encuentra un .gcloudignore, construye uno a
+# partir del .gitignore de la carpeta. El .gitignore de aqui excluye los dos
+# .jsonl a proposito (no se versionan; la copia canonica vive en data/qa/), asi
+# que gcloud los dejaba fuera del contexto de build y el COPY del Dockerfile
+# fallaba con "file not found in build context".
+#
+# Con este archivo presente, gcloud ignora el .gitignore y usa solo esta lista.
+# El dataset NO aparece aqui: tiene que subir al contexto de build.
+
+.git/
+.gitignore
+__pycache__/
+*.pyc
+*.ps1
+README.md
+.job_finetuning.json
