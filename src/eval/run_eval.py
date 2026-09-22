@@ -18,7 +18,14 @@ from pathlib import Path
 from metrics import ROUGE_TIPOS, es_valida, limpiar_prediccion, recall_at_k, rouge
 
 RAIZ = Path(__file__).resolve().parents[2]
-SISTEMAS = ("base", "finetuning", "rag")
+# Fase 3: 'rag-vertex' es el mismo corpus migrado a Vertex AI RAG Engine.
+# Se evalua como un sistema aparte, no reemplaza al RAG con FAISS: la gracia
+# es poder comparar los dos recuperadores sobre las mismas 20 preguntas.
+SISTEMAS = ("base", "finetuning", "rag", "rag-vertex", "rag-vertex-ft")
+# 'rag-vertex' recupera de RAG Engine y genera con Gemini; 'rag-vertex-ft'
+# recupera de lo mismo y genera con el modelo afinado servido en la VM. La
+# diferencia entre esas dos familias de filas aisla el efecto del generador;
+# la diferencia entre 'rag' y 'rag-vertex-ft', el del recuperador.
 KS = (1, 3, 5)
 
 

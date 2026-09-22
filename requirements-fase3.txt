@@ -1,0 +1,30 @@
+# Fase 3. Se instala en un entorno APARTE del principal (.venv-rag):
+# google-cloud-agentplatform arrastra google-cloud-aiplatform a la linea 2.x, y
+# requirements.txt lo fija en 1.75.0 para los scripts de despliegue.
+#
+#   python -m venv .venv-rag
+#   .venv-rag\Scripts\activate
+#   pip install -r requirements-fase3.txt
+
+# --- Vertex AI RAG Engine ---
+google-cloud-agentplatform>=2.1.3
+google-genai>=2.0.0
+google-cloud-storage>=2.19.0
+pandas>=2.2.3          # lo usa agentplatform para sus utilidades de GCS
+google-cloud-resource-manager>=1.14.0
+# ^ NO es opcional, aunque agentplatform no lo declare como dependencia.
+#   import_files() comprueba que el bucket sea del proyecto y, cuando le
+#   pasas un project ID (no un numero), resuelve el numero con este
+#   paquete. Toda la comprobacion esta dentro de un 'except Exception:
+#   return False', asi que sin el paquete el error que sale es
+#   'Bucket ... does not belong to project ...', que apunta al lugar
+#   equivocado y cuesta una hora de depuracion.
+
+# --- App de consulta ---
+# No necesita nada de GCP: habla HTTP con vLLM. Se puede instalar tambien en el
+# entorno principal si prefieres no activar el de RAG solo para abrir la app.
+streamlit>=1.40.0
+
+# --- Evaluacion (ya esta en requirements.txt; se repite para que .venv-rag
+#     pueda correr run_eval.py sin cambiar de entorno) ---
+rouge-score==0.1.2

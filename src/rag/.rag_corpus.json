@@ -1,0 +1,8 @@
+{
+  "project": "si7016-262-nlp",
+  "location": "us-west1",
+  "bucket": "asilvaz1taller3-west",
+  "corpus": "projects/350441321162/locations/us-west1/ragCorpora/6917529027641081856",
+  "display_name": "normas-ruido-taller3",
+  "embedding": "publishers/google/models/text-embedding-005"
+}

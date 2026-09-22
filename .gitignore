@@ -19,6 +19,11 @@ merged-model/
 __pycache__/
 .ipynb_checkpoints/
 .venv/
+.venv*/
+# ^ .venv-rag es el entorno aparte de la Fase 3 (requirements-fase3.txt), que
+#   existe porque google-cloud-agentplatform sube el SDK de aiplatform a la
+#   linea 2.x y el resto del repo esta fijado en 1.75.0. El patron .venv/ no lo
+#   cubria, asi que git lo estaba recorriendo entero.
 .env
 
 # Estado de los scripts de despliegue propios
