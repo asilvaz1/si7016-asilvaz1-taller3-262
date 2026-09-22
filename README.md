@@ -21,6 +21,9 @@ las mismas tareas.
 
 ## Resultados
 
+Para verificar esta tabla sin credenciales ni GPU, `notebooks/taller3-evaluacion-comparativa.ipynb`
+la recalcula desde `results/` con el mismo código de `src/eval/` y la compara con el CSV.
+
 Las 20 preguntas del conjunto de evaluación, con tres técnicas de prompt
 engineering por sistema, más `rag-anclado` en los dos sistemas RAG. Ninguna
 respuesta quedó vacía o con error. Fuente:
@@ -304,9 +307,10 @@ src/deploy/       despliegue y consulta de los endpoints de Vertex
 src/rag/          chunking, índice FAISS, recuperación y generación anclada
 src/eval/         limpieza de respuestas, ROUGE y Recall@K
 app/              interfaz de consulta en Streamlit (Fase 3)
+notebooks/        notebook ejecutado que recalcula y explica la evaluación comparativa
 prompts/          el prompt exacto de cada técnica de prompt engineering
 results/          respuestas de los cuatro sistemas y métricas comparativas
-evidencia/        capturas del despliegue, curva de entrenamiento y consultas
+evidencia/        Evidencias-Taller3.docx, capturas/ del despliegue, curva de entrenamiento y consultas
 docs/             declaración de ética, costos y runbook de la Fase 3
 requirements-fase3.txt  entorno aparte para el SDK de RAG Engine
 ```

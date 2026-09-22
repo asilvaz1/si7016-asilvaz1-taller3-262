@@ -40,7 +40,7 @@ autoría verificable con `git log --format='%an'`.
 **David Botero**
 
 - Despliegue del modelo afinado con vLLM en una VM de Compute Engine
-  (`src/deploy/07-vm-vllm.sh`, `08-predict-vllm.py`)-
+  (`src/deploy/07-vm-vllm.sh`, `08-predict-vllm.py`).
 - Interfaz de consulta (`app/streamlit_app.py`).
 - Migración del corpus a Vertex AI RAG Engine
   (`src/rag/vertex_rag_engine.py`).
