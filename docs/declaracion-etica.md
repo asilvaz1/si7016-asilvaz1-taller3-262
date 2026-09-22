@@ -39,10 +39,11 @@ autoría verificable con `git log --format='%an'`.
 
 **David Botero**
 
-- [PENDIENTE: una o dos líneas concretas y verificables sobre lo que hizo. Por
-  ejemplo: revisión del código, pruebas de que los scripts corren en otra
-  máquina, montaje de la interfaz de consulta, o apoyo en la depuración de un
-  problema puntual.]
+- Despliegue del modelo afinado con vLLM en una VM de Compute Engine
+  (`src/deploy/07-vm-vllm.sh`, `08-predict-vllm.py`)-
+- Interfaz de consulta (`app/streamlit_app.py`).
+- Migración del corpus a Vertex AI RAG Engine
+  (`src/rag/vertex_rag_engine.py`).
 
 Nota de transparencia sobre la autoría: a la fecha de esta entrega, el historial
 de git registra commits de Alejandro Silva Zuluaga (con dos identidades de git,
@@ -74,6 +75,20 @@ fuente principal de reúso y está declarado como tal:
   que le pregunta al SDK las combinaciones verificadas para Gemma.
 - Los notebooks `class05/2-rag/class05b-*.ipynb` son la referencia del pipeline
   de RAG.
+- `class05/apoyo-al-taller3/rag-gcp-vertex/rag-pensamiento-computacional.ipynb`
+  es el origen de `src/rag/vertex_rag_engine.py`: de ahí salen la elección de
+  `us-west1` (por la restricción del modo Spanner), el modelo de embeddings, los
+  parámetros de troceado y la forma de la generación anclada con la herramienta
+  de recuperación. El script no es una copia: añade el mapeo de los `.txt` a sus
+  PDF fuente, la escritura del esquema de resultados del taller, la importación
+  por lotes con URIs explícitas y las comprobaciones previas que el notebook no
+  tiene. Una nota del propio notebook ("para el demo, se cargaron a mano por la
+  interfaz consola") fue la pista que llevó a descartar la importación con
+  comodín, que devuelve cero sin fallar.
+- `ft-gemma-on-vm/` fue la referencia del trabajo en la VM, aunque el enfoque es
+  distinto: ese material sirve el modelo con `transformers` dentro de un
+  contenedor de JupyterHub, y aquí se sirve con vLLM sobre una API compatible
+  con OpenAI, que es lo que pide el enunciado.
 
 **Modelos, imágenes y bibliotecas de terceros**, usados bajo sus licencias:
 
@@ -85,6 +100,10 @@ fuente principal de reúso y está declarado como tal:
   Garden.
 - `transformers`, `peft`, `trl`, `bitsandbytes`, `faiss`, `sentence-transformers`,
   `rank_bm25` y `rouge-score`.
+- `vllm` para el serving en la VM, `streamlit` para la interfaz de consulta, y
+  `google-cloud-agentplatform` y `google-genai` para RAG Engine.
+- `text-embedding-005` y `gemini-2.5-flash` de Vertex AI, para los embeddings y
+  la generación anclada del RAG administrado.
 
 **Documentación consultada**: la referencia de `gcloud ai` de Google Cloud (de
 ahí salieron los nombres exactos de las banderas de contenedor, como
@@ -101,10 +120,9 @@ ese texto.
 
 ## 3. Uso de inteligencia artificial generativa
 
-Se usó **Claude (Anthropic)**, en la modalidad de asistente con acceso a la
-terminal y a los archivos del proyecto, de forma intensiva y a lo largo de todo
-el taller. Declararlo con precisión es parte de la regla de transparencia, así
-que este es el detalle:
+Se usó **Claude**, en la modalidad de asistente con acceso a la
+terminal y a los archivos del proyecto a lo largo de todo
+el taller. 
 
 **En qué ayudó de forma sustantiva:**
 
@@ -122,11 +140,21 @@ que este es el detalle:
 - Redacción del README, de los runbooks y de esta declaración.
 - Apoyo en la redacción de parte de las 100 preguntas y respuestas del dataset, a
   partir del texto extraído de cada norma.
+- Ayuda en la fase 3: los scripts de la VM, el cliente del endpoint, la app de
+  Streamlit y el script de RAG Engine, y
+  también el diagnóstico de los fallos que fueron apareciendo al ejecutarlos.
+  Varios de esos diagnósticos contradecían el mensaje de error del propio SDK
+  (ver la sección de Limitaciones del README), y comprobarlos fue trabajo
+  conjunto: el asistente proponía la causa y la ejecución en GCP la confirmaba
+  o la descartaba.
 
-**Qué hicimos nosotros y no se delegó:**
+**Qué hicimos nosotros:**
 
 - Toda la ejecución en GCP: los comandos, las credenciales, las decisiones de
-  gasto y el apagado de recursos.
+  gasto y el apagado de recursos. En la Fase 3 esto fue especialmente claro: el
+  asistente no tenía acceso a `gcloud` ni al proyecto, así que cada hipótesis
+  sobre por qué fallaba algo se resolvió corriendo el comando y trayendo la
+  salida de vuelta.
 - La selección del corpus, la resolución de los duplicados del corpus (qué
   edición de cada norma usar como fuente) y la validación de las preguntas
   contra el texto de las normas.
@@ -138,9 +166,7 @@ que este es el detalle:
   reparto de las 100 preguntas por categoría, split con semilla fija y el
   criterio de usar el mismo prompt en entrenamiento y evaluación.
 
-**Una precisión que importa para la honestidad del experimento:** el dataset de
+**Nota:** el dataset de
 preguntas y respuestas se construyó a partir del texto de las normas, no del
 conocimiento previo de ningún modelo, y cada número citado se verificó
-automáticamente contra el texto fuente antes de entrenar. Si las respuestas de
-referencia hubieran sido generadas libremente por un modelo, la comparación de
-esta entrega no mediría nada.
+automáticamente contra el texto fuente antes de entrenar.

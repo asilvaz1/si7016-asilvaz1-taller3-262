@@ -74,6 +74,56 @@ cobra.
 El gasto real se consulta en la consola, en **Facturación → Informes**,
 filtrando por el proyecto `si7016-262-nlp` y agrupando por SKU.
 
+## Fase 3: la VM con vLLM y el RAG Engine
+
+| Recurso | Máquina | Duración | Fuente del dato |
+| --- | --- | --- | --- |
+| VM de Compute Engine con vLLM | `g2` + 1 x L4, `us-west1-a` | una sesión de trabajo | estimado |
+| Embeddings de los 33 documentos | administrado | una vez | dentro de lo mínimo facturable |
+| Almacenamiento vectorial del corpus | administrado | mientras exista | centavos al mes |
+| Generación con Gemini (`ask`, la app y las 80 respuestas del eval) | administrado | ~100 llamadas | centavos |
+
+Una nota de la corrida de las 80 respuestas: una pregunta falló con `429
+RESOURCE_EXHAUSTED`, que es cuota por minuto y no presupuesto agotado. El
+script reintenta ahora ese error con espera creciente, y tiene un modo
+`run --reparar` que reintenta solo las filas sin respuesta sin repetir las
+demás, que además de costar menos evita que una segunda corrida cambie las 79
+respuestas que ya estaban medidas.
+
+| Concepto | Estimado |
+| --- | --- |
+| VM con L4, 3 a 4 horas | US$2.00 a 2.50 |
+| Embeddings, almacenamiento vectorial y generación | < US$0.50 |
+| **Total de la fase** | **US$2 a 3** |
+
+Con esto el taller cierra alrededor de **US$7 a 10**, dentro del presupuesto de
+US$7 a 16 de la hoja de ruta.
+
+Dos diferencias de la VM frente a los Custom Jobs, que son las que hay que tener
+presentes:
+
+- **La VM cobra mientras esté encendida, corra o no vLLM.** `07-vm-vllm.sh stop`
+  solo mata el proceso. Lo que deja de facturar es
+  `gcloud compute instances stop`. A US$0.56 la hora de L4 en Compute Engine,
+  una VM olvidada un fin de semana son unos US$27.
+- **Se hace `stop` y no `delete`.** El disco conserva vLLM instalado y los 17 GB
+  del modelo, así que una demostración posterior arranca en dos minutos en vez
+  de repetir `install` y `sync`. Un disco parado cuesta centavos al mes.
+
+El corpus de RAG Engine cobra almacenamiento vectorial mientras exista. Es poco,
+pero `src/deploy/09-apagar-todo.ps1 borrar-corpus` lo elimina cuando ya no se
+vaya a consultar.
+
+## Apagar al cerrar cada sesión
+
+Hay un script que hace las dos cosas y distingue entre ellas: apaga lo que cobra
+por tiempo encendido y **reporta** lo que cobra por existir, sin borrarlo.
+
+```powershell
+powershell -File src\deploy\09-apagar-todo.ps1 estado    # no toca nada
+powershell -File src\deploy\09-apagar-todo.ps1 apagar    # VM, endpoints, regla de firewall
+```
+
 ## Qué sigue costando después de la entrega
 
 Lo único vivo es almacenamiento. El modelo fusionado pesa unos 17 GB y es de
@@ -87,8 +137,14 @@ Para borrarlo cuando ya no se necesite:
 
 ```powershell
 gcloud storage rm -r gs://asilvaz1taller3/normas-ruido-merged
-gcloud storage rm -r gs://asilvaz1taller3-west
+gcloud storage rm -r gs://asilvaz1taller3-west/normas-ruido
 ```
+
+Ojo con `gs://asilvaz1taller3-west`: además de los artefactos del job de
+inferencia, ahora guarda los 33 documentos que alimentan el corpus de RAG
+Engine. Borrar el bucket entero deja el corpus sin fuente. Si el corpus ya se
+borró con `09-apagar-todo.ps1 borrar-corpus`, entonces sí se puede eliminar
+completo.
 
 Conviene **conservar** `gs://asilvaz1taller3/normas-ruido-lora/`: son unos 200 MB
 y contienen los adaptadores entrenados, que es el resultado real del

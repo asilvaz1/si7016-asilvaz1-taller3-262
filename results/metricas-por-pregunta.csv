@@ -59,6 +59,66 @@ base,chain-of-thought,What are the stated limitations of the ISO 4869-3 method?,
 base,chain-of-thought,What instrumentation does ISO 1996-2 require for environmental noise measurements?,True,0.36363636363636365,0.1276595744680851,0.2377622377622378,,,
 base,chain-of-thought,What general form does the CNOSSOS-EU sound power equation take as a function of vehicle speed?,True,0.1076923076923077,0.046875,0.1076923076923077,,,
 base,chain-of-thought,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.2900763358778626,0.10852713178294575,0.24427480916030533,,,
+finetuning,zero-shot,What does ISO 3382-1 specify?,True,0.628099173553719,0.42016806722689076,0.5785123966942148,,,
+finetuning,zero-shot,"What background noise criterion does ISO 3744 impose, and how is the correction K1 applied?",True,0.4339622641509434,0.14285714285714285,0.27358490566037735,,,
+finetuning,zero-shot,What does ISO 1996-2 require regarding acoustic calibration?,True,0.3697478991596639,0.22222222222222224,0.3529411764705882,,,
+finetuning,zero-shot,"Which physical effects are included in the ISO 9613-2 algorithms, and in which frequency bands do they work?",True,0.3150684931506849,0.01388888888888889,0.1506849315068493,,,
+finetuning,zero-shot,"What does ISO 3745 specify, and how does its accuracy compare with ISO 3744 and ISO 3746?",True,0.4674329501915709,0.18532818532818532,0.3065134099616858,,,
+finetuning,zero-shot,"According to ISO 9613-1, how should users obtain attenuation coefficients for conditions that are not listed in Table 1?",True,0.3106796116504854,0.05940594059405941,0.17475728155339806,,,
+finetuning,zero-shot,"What does ISO 10140-5 cover, and what qualification does it require of a test facility?",True,0.45882352941176474,0.21428571428571427,0.31764705882352945,,,
+finetuning,zero-shot,"What does ISO 16032 measure, and which quantity is reported?",True,0.28310502283105027,0.10138248847926268,0.1643835616438356,,,
+finetuning,zero-shot,How does CNOSSOS-EU represent a vehicle and a traffic flow geometrically?,True,0.4257425742574258,0.18000000000000002,0.2376237623762376,,,
+finetuning,zero-shot,What is the scope of ISO 16283-1 in terms of room volume and frequency range?,True,0.4293785310734463,0.18285714285714286,0.327683615819209,,,
+finetuning,zero-shot,"How does ISO 9612 define the daily noise exposure level LEX,8h?",True,0.35680751173708913,0.13270142180094788,0.24413145539906103,,,
+finetuning,zero-shot,Which reference time intervals does BS 4142 prescribe for day and night?,True,0.3757575757575758,0.09815950920245398,0.23030303030303031,,,
+finetuning,zero-shot,"What does ISO 354 specify, and what requirements apply to the reverberation room?",True,0.4768683274021352,0.14336917562724016,0.2633451957295374,,,
+finetuning,zero-shot,Which noise descriptor does ISO 1996-3 prefer for specifying noise limits?,True,0.3625,0.08860759493670885,0.25,,,
+finetuning,zero-shot,"What does ISO 16283-2 specify, and which impact sources does it describe?",True,0.37777777777777777,0.10112359550561797,0.22222222222222224,,,
+finetuning,zero-shot,What does ISO 3382-1 say about deriving decay curves from non-continuous excitation?,True,0.4363636363636364,0.09815950920245398,0.2181818181818182,,,
+finetuning,zero-shot,What are the stated limitations of the ISO 4869-3 method?,True,0.27672955974842767,0.025477707006369428,0.13836477987421383,,,
+finetuning,zero-shot,What instrumentation does ISO 1996-2 require for environmental noise measurements?,True,0.47567567567567565,0.1748633879781421,0.3027027027027028,,,
+finetuning,zero-shot,What general form does the CNOSSOS-EU sound power equation take as a function of vehicle speed?,True,0.32631578947368417,0.1276595744680851,0.2210526315789474,,,
+finetuning,zero-shot,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.5637583892617449,0.2585034013605442,0.44295302013422816,,,
+finetuning,few-shot,What does ISO 3382-1 specify?,True,0.3873873873873874,0.19999999999999998,0.32432432432432434,,,
+finetuning,few-shot,"What background noise criterion does ISO 3744 impose, and how is the correction K1 applied?",True,0.4532374100719425,0.15942028985507245,0.2661870503597122,,,
+finetuning,few-shot,What does ISO 1996-2 require regarding acoustic calibration?,True,0.4,0.23728813559322035,0.3666666666666667,,,
+finetuning,few-shot,"Which physical effects are included in the ISO 9613-2 algorithms, and in which frequency bands do they work?",True,0.27322404371584696,0.03314917127071823,0.16393442622950818,,,
+finetuning,few-shot,"What does ISO 3745 specify, and how does its accuracy compare with ISO 3744 and ISO 3746?",True,0.43448275862068964,0.19444444444444445,0.2827586206896552,,,
+finetuning,few-shot,"According to ISO 9613-1, how should users obtain attenuation coefficients for conditions that are not listed in Table 1?",True,0.4067796610169491,0.1206896551724138,0.25423728813559326,,,
+finetuning,few-shot,"What does ISO 10140-5 cover, and what qualification does it require of a test facility?",True,0.3918367346938776,0.14814814814814814,0.2530612244897959,,,
+finetuning,few-shot,"What does ISO 16032 measure, and which quantity is reported?",True,0.3940520446096654,0.1198501872659176,0.26022304832713755,,,
+finetuning,few-shot,How does CNOSSOS-EU represent a vehicle and a traffic flow geometrically?,True,0.3461538461538462,0.0930232558139535,0.2153846153846154,,,
+finetuning,few-shot,What is the scope of ISO 16283-1 in terms of room volume and frequency range?,True,0.42063492063492064,0.168,0.27777777777777773,,,
+finetuning,few-shot,"How does ISO 9612 define the daily noise exposure level LEX,8h?",True,0.48618784530386744,0.18994413407821226,0.23204419889502761,,,
+finetuning,few-shot,Which reference time intervals does BS 4142 prescribe for day and night?,True,0.38823529411764707,0.10714285714285714,0.21176470588235294,,,
+finetuning,few-shot,"What does ISO 354 specify, and what requirements apply to the reverberation room?",True,0.43478260869565216,0.15328467153284672,0.2608695652173913,,,
+finetuning,few-shot,Which noise descriptor does ISO 1996-3 prefer for specifying noise limits?,True,0.4311926605504587,0.1111111111111111,0.25688073394495414,,,
+finetuning,few-shot,"What does ISO 16283-2 specify, and which impact sources does it describe?",True,0.2693602693602694,0.05423728813559322,0.18181818181818185,,,
+finetuning,few-shot,What does ISO 3382-1 say about deriving decay curves from non-continuous excitation?,True,0.45859872611464964,0.14193548387096777,0.267515923566879,,,
+finetuning,few-shot,What are the stated limitations of the ISO 4869-3 method?,True,0.27027027027027023,0.02727272727272727,0.16216216216216217,,,
+finetuning,few-shot,What instrumentation does ISO 1996-2 require for environmental noise measurements?,True,0.45161290322580644,0.1830065359477124,0.30967741935483867,,,
+finetuning,few-shot,What general form does the CNOSSOS-EU sound power equation take as a function of vehicle speed?,True,0.26760563380281693,0.1285714285714286,0.18309859154929575,,,
+finetuning,few-shot,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.4536082474226804,0.18749999999999997,0.3402061855670103,,,
+finetuning,chain-of-thought,What does ISO 3382-1 specify?,True,0.6382978723404256,0.41304347826086957,0.5744680851063829,,,
+finetuning,chain-of-thought,"What background noise criterion does ISO 3744 impose, and how is the correction K1 applied?",True,0.42060085836909866,0.10389610389610389,0.22317596566523604,,,
+finetuning,chain-of-thought,What does ISO 1996-2 require regarding acoustic calibration?,True,0.4,0.11382113821138211,0.208,,,
+finetuning,chain-of-thought,"Which physical effects are included in the ISO 9613-2 algorithms, and in which frequency bands do they work?",True,0.3184713375796178,0.03870967741935484,0.15286624203821655,,,
+finetuning,chain-of-thought,"What does ISO 3745 specify, and how does its accuracy compare with ISO 3744 and ISO 3746?",True,0.3609022556390977,0.1984732824427481,0.19548872180451127,,,
+finetuning,chain-of-thought,"According to ISO 9613-1, how should users obtain attenuation coefficients for conditions that are not listed in Table 1?",True,0.2711864406779661,0.0689655172413793,0.1694915254237288,,,
+finetuning,chain-of-thought,"What does ISO 10140-5 cover, and what qualification does it require of a test facility?",True,0.2,0.0847457627118644,0.16666666666666669,,,
+finetuning,chain-of-thought,"What does ISO 16032 measure, and which quantity is reported?",True,0.2857142857142857,0.048,0.19047619047619047,,,
+finetuning,chain-of-thought,How does CNOSSOS-EU represent a vehicle and a traffic flow geometrically?,True,0.24705882352941175,0.04761904761904762,0.16470588235294117,,,
+finetuning,chain-of-thought,What is the scope of ISO 16283-1 in terms of room volume and frequency range?,True,0.40201005025125636,0.18274111675126903,0.2914572864321608,,,
+finetuning,chain-of-thought,"How does ISO 9612 define the daily noise exposure level LEX,8h?",True,0.4157303370786517,0.12500000000000003,0.2584269662921348,,,
+finetuning,chain-of-thought,Which reference time intervals does BS 4142 prescribe for day and night?,True,0.3283582089552239,0.06060606060606061,0.20895522388059704,,,
+finetuning,chain-of-thought,"What does ISO 354 specify, and what requirements apply to the reverberation room?",True,0.45018450184501846,0.1338289962825279,0.2656826568265683,,,
+finetuning,chain-of-thought,Which noise descriptor does ISO 1996-3 prefer for specifying noise limits?,True,0.37762237762237766,0.11347517730496454,0.2937062937062937,,,
+finetuning,chain-of-thought,"What does ISO 16283-2 specify, and which impact sources does it describe?",True,0.43037974683544306,0.08974358974358974,0.24050632911392406,,,
+finetuning,chain-of-thought,What does ISO 3382-1 say about deriving decay curves from non-continuous excitation?,True,0.3827160493827161,0.075,0.24691358024691362,,,
+finetuning,chain-of-thought,What are the stated limitations of the ISO 4869-3 method?,True,0.30392156862745096,0.039603960396039604,0.16666666666666663,,,
+finetuning,chain-of-thought,What instrumentation does ISO 1996-2 require for environmental noise measurements?,True,0.46632124352331605,0.13612565445026178,0.2797927461139897,,,
+finetuning,chain-of-thought,What general form does the CNOSSOS-EU sound power equation take as a function of vehicle speed?,True,0.07692307692307693,0.0,0.046153846153846156,,,
+finetuning,chain-of-thought,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.46783625730994155,0.20118343195266275,0.3391812865497076,,,
 rag,rag-anclado,What does ISO 3382-1 specify?,True,0.36942675159235666,0.14193548387096772,0.2929936305732484,1.0,1.0,1.0
 rag,zero-shot,What does ISO 3382-1 specify?,True,0.2686567164179105,0.07035175879396985,0.1990049751243781,1.0,1.0,1.0
 rag,few-shot,What does ISO 3382-1 specify?,True,0.19999999999999998,0.05128205128205127,0.09999999999999999,1.0,1.0,1.0
@@ -139,3 +199,83 @@ rag,rag-anclado,"What is the frequency range of interest in ISO 3746, and what d
 rag,zero-shot,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.6257668711656442,0.4720496894409938,0.4662576687116564,1.0,1.0,1.0
 rag,few-shot,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.5454545454545454,0.4461538461538461,0.5151515151515151,1.0,1.0,1.0
 rag,chain-of-thought,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.5714285714285715,0.45801526717557256,0.5263157894736842,1.0,1.0,1.0
+rag-vertex,rag-anclado,What does ISO 3382-1 specify?,True,0.10256410256410256,0.07894736842105263,0.10256410256410256,1.0,1.0,1.0
+rag-vertex,rag-anclado,"What background noise criterion does ISO 3744 impose, and how is the correction K1 applied?",True,0.5081967213114755,0.21978021978021978,0.31693989071038253,1.0,1.0,1.0
+rag-vertex,rag-anclado,What does ISO 1996-2 require regarding acoustic calibration?,True,0.11244979919678715,0.0242914979757085,0.05622489959839357,1.0,1.0,1.0
+rag-vertex,rag-anclado,"Which physical effects are included in the ISO 9613-2 algorithms, and in which frequency bands do they work?",True,0.6113989637305699,0.4607329842931937,0.5077720207253886,1.0,1.0,1.0
+rag-vertex,rag-anclado,"What does ISO 3745 specify, and how does its accuracy compare with ISO 3744 and ISO 3746?",True,0.6262626262626263,0.4135593220338983,0.531986531986532,1.0,1.0,1.0
+rag-vertex,rag-anclado,"According to ISO 9613-1, how should users obtain attenuation coefficients for conditions that are not listed in Table 1?",True,0.6226415094339622,0.4807692307692307,0.5283018867924528,1.0,1.0,1.0
+rag-vertex,rag-anclado,"What does ISO 10140-5 cover, and what qualification does it require of a test facility?",True,0.20740740740740743,0.09022556390977443,0.16296296296296295,1.0,1.0,1.0
+rag-vertex,rag-anclado,"What does ISO 16032 measure, and which quantity is reported?",True,0.07692307692307691,0.007751937984496125,0.06923076923076923,1.0,1.0,1.0
+rag-vertex,rag-anclado,How does CNOSSOS-EU represent a vehicle and a traffic flow geometrically?,True,0.632183908045977,0.46511627906976744,0.5517241379310345,1.0,1.0,1.0
+rag-vertex,rag-anclado,What is the scope of ISO 16283-1 in terms of room volume and frequency range?,True,0.12440191387559808,0.038461538461538464,0.06220095693779904,1.0,1.0,1.0
+rag-vertex,rag-anclado,"How does ISO 9612 define the daily noise exposure level LEX,8h?",True,0.2844444444444444,0.12556053811659196,0.24888888888888888,1.0,1.0,1.0
+rag-vertex,rag-anclado,Which reference time intervals does BS 4142 prescribe for day and night?,True,0.3697478991596639,0.2564102564102564,0.2689075630252101,1.0,1.0,1.0
+rag-vertex,rag-anclado,"What does ISO 354 specify, and what requirements apply to the reverberation room?",True,0.05687203791469195,0.019138755980861243,0.04739336492890995,1.0,1.0,1.0
+rag-vertex,rag-anclado,Which noise descriptor does ISO 1996-3 prefer for specifying noise limits?,True,0.4905660377358491,0.40384615384615374,0.45283018867924535,1.0,1.0,1.0
+rag-vertex,rag-anclado,"What does ISO 16283-2 specify, and which impact sources does it describe?",True,0.07092198581560284,0.014388489208633093,0.05673758865248227,1.0,1.0,1.0
+rag-vertex,rag-anclado,What does ISO 3382-1 say about deriving decay curves from non-continuous excitation?,True,0.0375,0.0,0.0375,1.0,1.0,1.0
+rag-vertex,rag-anclado,What are the stated limitations of the ISO 4869-3 method?,True,0.09558823529411765,0.02962962962962963,0.07352941176470588,1.0,1.0,1.0
+rag-vertex,rag-anclado,What instrumentation does ISO 1996-2 require for environmental noise measurements?,True,0.34101382488479265,0.13953488372093023,0.2949308755760369,1.0,1.0,1.0
+rag-vertex,rag-anclado,What general form does the CNOSSOS-EU sound power equation take as a function of vehicle speed?,True,0.718232044198895,0.6256983240223463,0.6298342541436465,1.0,1.0,1.0
+rag-vertex,rag-anclado,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.6338028169014084,0.5428571428571428,0.6056338028169014,0.0,1.0,1.0
+rag-vertex,zero-shot,What does ISO 3382-1 specify?,True,0.28846153846153844,0.11764705882352941,0.23076923076923075,1.0,1.0,1.0
+rag-vertex,zero-shot,"What background noise criterion does ISO 3744 impose, and how is the correction K1 applied?",True,0.5257985257985257,0.23703703703703705,0.33415233415233414,1.0,1.0,1.0
+rag-vertex,zero-shot,What does ISO 1996-2 require regarding acoustic calibration?,True,0.39408866995073893,0.23880597014925373,0.29556650246305416,1.0,1.0,1.0
+rag-vertex,zero-shot,"Which physical effects are included in the ISO 9613-2 algorithms, and in which frequency bands do they work?",True,0.4806201550387597,0.3464566929133859,0.3100775193798449,1.0,1.0,1.0
+rag-vertex,zero-shot,"What does ISO 3745 specify, and how does its accuracy compare with ISO 3744 and ISO 3746?",True,0.6135458167330677,0.3775100401606426,0.5099601593625499,1.0,1.0,1.0
+rag-vertex,zero-shot,"According to ISO 9613-1, how should users obtain attenuation coefficients for conditions that are not listed in Table 1?",True,0.6055045871559633,0.4672897196261682,0.5137614678899082,1.0,1.0,1.0
+rag-vertex,zero-shot,"What does ISO 10140-5 cover, and what qualification does it require of a test facility?",True,0.37988826815642457,0.16949152542372883,0.29050279329608936,1.0,1.0,1.0
+rag-vertex,zero-shot,"What does ISO 16032 measure, and which quantity is reported?",True,0.49342105263157904,0.2781456953642384,0.3486842105263158,1.0,1.0,1.0
+rag-vertex,zero-shot,How does CNOSSOS-EU represent a vehicle and a traffic flow geometrically?,True,0.5811965811965811,0.42241379310344823,0.5213675213675214,1.0,1.0,1.0
+rag-vertex,zero-shot,What is the scope of ISO 16283-1 in terms of room volume and frequency range?,True,0.26038781163434904,0.061281337047353765,0.15512465373961218,1.0,1.0,1.0
+rag-vertex,zero-shot,"How does ISO 9612 define the daily noise exposure level LEX,8h?",True,0.5617977528089887,0.35227272727272724,0.44943820224719105,1.0,1.0,1.0
+rag-vertex,zero-shot,Which reference time intervals does BS 4142 prescribe for day and night?,True,0.21428571428571427,0.1090909090909091,0.21428571428571427,1.0,1.0,1.0
+rag-vertex,zero-shot,"What does ISO 354 specify, and what requirements apply to the reverberation room?",True,0.5755395683453237,0.3840579710144928,0.4676258992805755,1.0,1.0,1.0
+rag-vertex,zero-shot,Which noise descriptor does ISO 1996-3 prefer for specifying noise limits?,True,0.47706422018348615,0.3925233644859813,0.44036697247706424,1.0,1.0,1.0
+rag-vertex,zero-shot,"What does ISO 16283-2 specify, and which impact sources does it describe?",True,0.6178861788617886,0.512396694214876,0.5691056910569106,1.0,1.0,1.0
+rag-vertex,zero-shot,What does ISO 3382-1 say about deriving decay curves from non-continuous excitation?,True,0.6577181208053691,0.3945578231292517,0.5771812080536913,1.0,1.0,1.0
+rag-vertex,zero-shot,What are the stated limitations of the ISO 4869-3 method?,True,0.46896551724137925,0.3194444444444444,0.40689655172413797,1.0,1.0,1.0
+rag-vertex,zero-shot,What instrumentation does ISO 1996-2 require for environmental noise measurements?,True,0.7254901960784315,0.4851485148514851,0.5882352941176471,1.0,1.0,1.0
+rag-vertex,zero-shot,What general form does the CNOSSOS-EU sound power equation take as a function of vehicle speed?,True,0.6599999999999999,0.5151515151515151,0.5,1.0,1.0,1.0
+rag-vertex,zero-shot,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.7303370786516854,0.6136363636363635,0.6966292134831461,0.0,1.0,1.0
+rag-vertex,few-shot,What does ISO 3382-1 specify?,True,0.3714285714285714,0.20588235294117646,0.2857142857142857,1.0,1.0,1.0
+rag-vertex,few-shot,"What background noise criterion does ISO 3744 impose, and how is the correction K1 applied?",True,0.6552901023890785,0.3161512027491409,0.43686006825938567,1.0,1.0,1.0
+rag-vertex,few-shot,What does ISO 1996-2 require regarding acoustic calibration?,True,0.4505494505494505,0.34444444444444444,0.3736263736263737,1.0,1.0,1.0
+rag-vertex,few-shot,"Which physical effects are included in the ISO 9613-2 algorithms, and in which frequency bands do they work?",True,0.5378151260504201,0.41025641025641024,0.3361344537815126,1.0,1.0,1.0
+rag-vertex,few-shot,"What does ISO 3745 specify, and how does its accuracy compare with ISO 3744 and ISO 3746?",True,0.5615763546798029,0.3383084577114428,0.4039408866995074,1.0,1.0,1.0
+rag-vertex,few-shot,"According to ISO 9613-1, how should users obtain attenuation coefficients for conditions that are not listed in Table 1?",True,0.6336633663366337,0.5050505050505051,0.5544554455445544,1.0,1.0,1.0
+rag-vertex,few-shot,"What does ISO 10140-5 cover, and what qualification does it require of a test facility?",True,0.27692307692307694,0.1875,0.24615384615384614,1.0,1.0,1.0
+rag-vertex,few-shot,"What does ISO 16032 measure, and which quantity is reported?",True,0.416289592760181,0.2831050228310502,0.3710407239819004,1.0,1.0,1.0
+rag-vertex,few-shot,How does CNOSSOS-EU represent a vehicle and a traffic flow geometrically?,True,0.6744186046511628,0.5647058823529412,0.6395348837209303,1.0,1.0,1.0
+rag-vertex,few-shot,What is the scope of ISO 16283-1 in terms of room volume and frequency range?,True,0.38341968911917096,0.09424083769633508,0.2072538860103627,1.0,1.0,1.0
+rag-vertex,few-shot,"How does ISO 9612 define the daily noise exposure level LEX,8h?",True,0.6235294117647059,0.4642857142857143,0.5176470588235293,1.0,1.0,1.0
+rag-vertex,few-shot,Which reference time intervals does BS 4142 prescribe for day and night?,True,0.3148148148148148,0.2830188679245283,0.3148148148148148,1.0,1.0,1.0
+rag-vertex,few-shot,"What does ISO 354 specify, and what requirements apply to the reverberation room?",True,0.45128205128205123,0.39378238341968913,0.45128205128205123,1.0,1.0,1.0
+rag-vertex,few-shot,Which noise descriptor does ISO 1996-3 prefer for specifying noise limits?,True,0.48598130841121495,0.39999999999999997,0.44859813084112143,1.0,1.0,1.0
+rag-vertex,few-shot,"What does ISO 16283-2 specify, and which impact sources does it describe?",True,0.6386554621848739,0.5299145299145299,0.5882352941176471,1.0,1.0,1.0
+rag-vertex,few-shot,What does ISO 3382-1 say about deriving decay curves from non-continuous excitation?,True,0.6206896551724138,0.42105263157894735,0.5517241379310346,1.0,1.0,1.0
+rag-vertex,few-shot,What are the stated limitations of the ISO 4869-3 method?,True,0.7485380116959065,0.5088757396449705,0.6900584795321638,1.0,1.0,1.0
+rag-vertex,few-shot,What instrumentation does ISO 1996-2 require for environmental noise measurements?,True,0.5714285714285714,0.34210526315789475,0.4415584415584416,1.0,1.0,1.0
+rag-vertex,few-shot,What general form does the CNOSSOS-EU sound power equation take as a function of vehicle speed?,True,0.5000000000000001,0.41333333333333333,0.3947368421052632,1.0,1.0,1.0
+rag-vertex,few-shot,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.8074534161490684,0.7044025157232704,0.7701863354037267,0.0,1.0,1.0
+rag-vertex,chain-of-thought,What does ISO 3382-1 specify?,True,0.26865671641791045,0.09230769230769231,0.17910447761194026,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"What background noise criterion does ISO 3744 impose, and how is the correction K1 applied?",True,0.3295454545454545,0.16091954022988506,0.3181818181818182,1.0,1.0,1.0
+rag-vertex,chain-of-thought,What does ISO 1996-2 require regarding acoustic calibration?,True,0.5185185185185185,0.4,0.4320987654320988,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"Which physical effects are included in the ISO 9613-2 algorithms, and in which frequency bands do they work?",True,0.49122807017543857,0.41071428571428564,0.3157894736842105,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"What does ISO 3745 specify, and how does its accuracy compare with ISO 3744 and ISO 3746?",True,0.5064935064935064,0.2236842105263158,0.3506493506493507,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"According to ISO 9613-1, how should users obtain attenuation coefficients for conditions that are not listed in Table 1?",True,0.42352941176470593,0.3855421686746988,0.42352941176470593,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"What does ISO 10140-5 cover, and what qualification does it require of a test facility?",True,0.0,0.0,0.0,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"What does ISO 16032 measure, and which quantity is reported?",True,0.4214876033057851,0.225,0.3140495867768595,1.0,1.0,1.0
+rag-vertex,chain-of-thought,How does CNOSSOS-EU represent a vehicle and a traffic flow geometrically?,True,0.6666666666666666,0.449438202247191,0.5333333333333333,1.0,1.0,1.0
+rag-vertex,chain-of-thought,What is the scope of ISO 16283-1 in terms of room volume and frequency range?,True,0.2993197278911564,0.08275862068965517,0.20408163265306123,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"How does ISO 9612 define the daily noise exposure level LEX,8h?",True,0.5365853658536585,0.308641975308642,0.35365853658536583,1.0,1.0,1.0
+rag-vertex,chain-of-thought,Which reference time intervals does BS 4142 prescribe for day and night?,True,0.17647058823529413,0.12000000000000001,0.17647058823529413,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"What does ISO 354 specify, and what requirements apply to the reverberation room?",True,0.42512077294685985,0.2731707317073171,0.3768115942028985,1.0,1.0,1.0
+rag-vertex,chain-of-thought,Which noise descriptor does ISO 1996-3 prefer for specifying noise limits?,True,0.3368421052631579,0.30107526881720426,0.3368421052631579,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"What does ISO 16283-2 specify, and which impact sources does it describe?",True,0.6386554621848739,0.4957264957264958,0.5714285714285715,1.0,1.0,1.0
+rag-vertex,chain-of-thought,What does ISO 3382-1 say about deriving decay curves from non-continuous excitation?,True,0.5346534653465346,0.38383838383838387,0.49504950495049505,1.0,1.0,1.0
+rag-vertex,chain-of-thought,What are the stated limitations of the ISO 4869-3 method?,True,0.5748502994011976,0.2909090909090909,0.4550898203592814,1.0,1.0,1.0
+rag-vertex,chain-of-thought,What instrumentation does ISO 1996-2 require for environmental noise measurements?,True,0.48175182481751827,0.3407407407407408,0.43795620437956206,1.0,1.0,1.0
+rag-vertex,chain-of-thought,What general form does the CNOSSOS-EU sound power equation take as a function of vehicle speed?,True,0.1639344262295082,0.15,0.1639344262295082,1.0,1.0,1.0
+rag-vertex,chain-of-thought,"What is the frequency range of interest in ISO 3746, and what does the reference box enclose?",True,0.6338028169014084,0.5285714285714285,0.5915492957746479,0.0,1.0,1.0
