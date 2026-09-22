@@ -1,52 +1,45 @@
 # Evidencia del despliegue en GCP
 
-El entregable 1.d del taller pide capturas de pantalla de la ejecución en GCP.
-Esta es la lista de lo que hay que capturar, con el nombre de archivo y qué tiene
-que verse en cada una para que sirva como evidencia.
+Entregable 1.d del taller. La evidencia está en tres formatos:
 
-Todas corresponden a recursos que siguen existiendo en el proyecto
-`si7016-262-nlp`, salvo donde se indique.
+- **`Evidencias-Taller3.docx`**: el documento con todas las capturas y las
+  salidas de consola, en orden de ejecución (Fase 0, fine-tuning, inferencia,
+  Fase 3 con vLLM en la VM, RAG Engine y Streamlit).
+- **`capturas/`**: las mismas 18 capturas extraídas del documento, con nombre
+  descriptivo, para verlas sin abrir Word.
+- **Archivos de texto** (sección siguiente), que se pueden citar y buscar.
 
-| Archivo | Dónde | Qué tiene que verse |
-| --- | --- | --- |
-| `01-cuota-gpu.png` | IAM y administración → Cuotas, filtro `custom_model_training_nvidia_l4_gpus` | La cuota aprobada en `us-central1` y en `us-west1`, con su límite |
-| `02-endpoint-model-garden.png` | Vertex AI → Predicción en línea → Endpoints, o la captura guardada de la sesión de la línea base | El endpoint del modelo base `gemma-7b-it`. **Ya se apagó**, así que sirve una captura anterior o el archivo `src/deploy/.endpoint_base.json` |
-| `03-vertex-training-job.png` | Vertex AI → Entrenamiento → Trabajos personalizados, `us-central1` | El job del entrenamiento completo, en estado terminado, con su duración |
-| `04-curva-loss.png` | Explorador de registros, filtro `resource.type="ml_job"` | Las líneas de `loss` del entrenamiento. El texto completo ya está transcrito en `curva-loss-entrenamiento.md` |
-| `05-job-fusion.png` | Vertex AI → Entrenamiento → Trabajos personalizados | El job `merge-lora-...`, que es el paso de "modelo congelado + adaptadores, mezclar" del enunciado |
-| `06-bucket-artefactos.png` | Cloud Storage → `asilvaz1taller3` | Las carpetas `normas-ruido-lora/` (adaptadores), `normas-ruido-merged/` (modelo fusionado) e `inferencia/` (respuestas) |
-| `07-model-registry.png` | Vertex AI → Model Registry | El modelo `gemma-7b-it-normas-ruido-merged` registrado |
-| `08-job-inferencia-uswest1.png` | Vertex AI → Entrenamiento → Trabajos personalizados, **`us-west1`** | El job `infer-finetuning-...` terminado. Ojo con el selector de región |
-| `09-capacidad-insuficiente.png` | Explorador de registros | El error `Resources are insufficient in region: us-central1` junto a la cuota en 0% de uso. Documenta que el problema fue capacidad y no configuración, y justifica el cambio de región |
+Proyecto `si7016-262-nlp`.
 
-La 09 es opcional pero vale la pena: muestra un problema real diagnosticado y
-resuelto, que es más interesante que una captura de algo que funcionó a la
-primera.
+## Capturas
 
-## Fase 3: VM con vLLM, app de consulta y RAG Engine
-
-Estas son nuevas. Las tres primeras son las que cierran el requisito del
-enunciado de "correr el modelo en la VM usando vLLM".
-
-| Archivo | Dónde | Qué tiene que verse |
-| --- | --- | --- |
-| `10-vm-instancia.png` | Compute Engine → Instancias de VM | La VM con su tipo de máquina y la GPU L4 asociada. Tomarla **antes** de apagarla |
-| `11-nvidia-smi-modelo-cargado.png` | Terminal SSH de la VM, con vLLM sirviendo | `nvidia-smi` mostrando el proceso de Python y la VRAM ocupada. Es la prueba de que el modelo de 17 GB está de verdad en la tarjeta |
-| `12-vllm-arranque.png` | `tail ~/vllm.log` en la VM | Las líneas de arranque, en particular la de `KV cache size`. Documenta que los argumentos de memoria funcionaron |
-| `13-vllm-models.png` | Navegador o consola, `http://localhost:8000/v1/models` con el túnel abierto | El JSON con `gemma-7b-it-normas-ruido` y `max_model_len: 1024`. Prueba a la vez el serving y el túnel |
-| `14-streamlit-lado-a-lado.png` | La app, pestaña "Lado a lado" | Las dos respuestas, sus métricas y los fragmentos recuperados. **Es la captura más informativa del taller entero** |
-| `15-streamlit-fragmentos.png` | La app, pestaña "RAG Engine" | Los fragmentos con su norma y su score, que es lo que hace visible por qué el RAG acierta las cifras |
-| `16-rag-engine-corpus.png` | Agent Platform → RAG Engine → el corpus → Files | El corpus `normas-ruido-taller3` en `us-west1` con sus 33 archivos indexados |
-| `17-bucket-corpus.png` | Cloud Storage → `asilvaz1taller3-west/normas-ruido/` | Los 33 `.txt` que alimentan el corpus |
-| `18-vm-apagada.png` | Compute Engine → Instancias de VM | La VM en `TERMINATED`. Es la prueba de que se controló el costo, y cierra el relato que abre la 01 |
-
-Opcionales, pero cada una cuenta algo que no se ve en las demás:
-
-| Archivo | Qué documenta |
+| Archivo | Qué muestra |
 | --- | --- |
-| `19-ask-con-y-sin-rag.png` | La salida de `vertex_rag_engine.py ask`: la misma pregunta respondida con el corpus y sin él. Es la demostración directa de que el conocimiento viene del corpus y no del modelo |
-| `20-comparar-endpoint.png` | La salida de `comparar_finetuning_vllm.py`: el endpoint y el job por lotes dan el mismo ROUGE aunque el texto difiera |
-| `21-analisis-forma.png` | La salida de `analizar_respuestas.py`: es la tabla que explica por qué `rag-anclado` puntúa bajo en `rag-vertex`, y la que sostiene la sección de Resultados sobre el corpus bilingüe |
+| `01-vertex-endpoint-modelo-base.png` | Vertex AI → Endpoints: el endpoint `gemma-7b-it-base-si7016-mg-deploy` del modelo base (Model Garden), `us-central1`. Ya sin modelo desplegado, porque se hizo undeploy al terminar la línea base |
+| `02-model-registry-gemma-base.png` | Model Registry: las versiones del modelo base importadas desde Model Garden |
+| `03-custom-jobs-entrenamiento-fusion-inferencia.png` | Custom Jobs finalizados: prueba de humo, entrenamiento QLoRA (`gemma-7b-it-normas-ruido-lora`, 17 min 38 s), fusión de adaptadores (`merge-lora-...`) e inferencia (`infer-finetuning-...`) |
+| `04-custom-jobs-otra-region.png` | Selector de región de Custom Jobs en otra región, sin trabajos |
+| `05-model-registry-modelo-afinado.png` | Model Registry: `gemma-7b-it-normas-...` de origen *Entrenamiento personalizado*, el modelo fusionado |
+| `06-bucket-artefactos.png` | Bucket `asilvaz1taller3`: `normas-ruido-lora/` (adaptadores), `normas-ruido-merged/` (modelo fusionado), `inferencia/`, `datasets/`, `smoke-test/` |
+| `07-custom-jobs-detalle.png` | La misma lista de jobs con duración y fechas |
+| `08-logs-curva-loss.png` | Cloud Logging del entrenamiento: `loss` de 7.33 a 0.16 en 10 épocas y `train_runtime` 847 s. Transcrita en `curva-loss-entrenamiento.md` |
+| `09-logs-adaptadores-guardados.png` | Los adaptadores guardados en `gs://asilvaz1taller3/normas-ruido-lora` y `Job completed successfully` |
+| `10-logs-inferencia-modelo-afinado.png` | Logs del job de inferencia: 20 respuestas por técnica y copia de los jsonl a `gs://asilvaz1taller3/inferencia` |
+| `11-logs-capacidad-insuficiente.png` | `Resources are insufficient in region: us-central1`: el problema de capacidad de GPU, documentado en el README |
+| `12-streamlit-afinado-few-shot.png` | App de consulta: el modelo afinado servido con vLLM en la VM, técnica few-shot, con latencia y ROUGE-1 |
+| `13-streamlit-prompt-exacto-few-shot.png` | La referencia del dataset y el prompt exacto enviado al modelo |
+| `14-streamlit-rag-engine-respuesta.png` | Pestaña RAG Engine: respuesta anclada desde el corpus `normas-ruido-taller3` en `us-west1` |
+| `15-streamlit-rag-engine-fragmentos.png` | Los fragmentos recuperados por RAG Engine, con norma y score |
+| `16-streamlit-lado-a-lado-pregunta.png` | Pestaña "Lado a lado": la misma pregunta a los dos sistemas desplegados |
+| `17-streamlit-lado-a-lado-respuestas.png` | Las dos respuestas con sus métricas: afinado (vLLM) contra RAG Engine |
+| `18-streamlit-lado-a-lado-recuperados.png` | Las normas recuperadas por el RAG para esa pregunta |
+
+El `.docx` trae además, como texto, la salida de consola de la VM con vLLM
+(`07-vm-vllm.sh serve`, `status` con `/v1/models` mostrando
+`gemma-7b-it-normas-ruido` y `max_model_len: 1024`, y `test`), el túnel SSH y la
+consulta por `08-predict-vllm.py`, la comparación endpoint contra lotes, la
+importación de los 33 documentos a RAG Engine y la salida de
+`vertex_rag_engine.py ask` con y sin RAG.
 
 ## Evidencia en texto, que es mejor que una captura
 

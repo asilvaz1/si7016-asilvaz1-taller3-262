@@ -1,3 +1,6 @@
+> **Documento histórico.** Es el acuerdo de trabajo en pareja del 19 de septiembre; los estados
+> "pendiente" que aparecen aquí ya se cerraron. El estado final está en `README.md`.
+
 # HANDOFF — Taller 3 NLP (SI7016), trabajo en pareja
 
 Documento de arranque para quien entra a colaborar. Entrega: **martes 22 de septiembre**.
